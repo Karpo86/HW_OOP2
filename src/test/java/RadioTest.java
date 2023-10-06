@@ -45,20 +45,21 @@ public class RadioTest {
     @Test
     public void TestNextStation() {
         Radio radio = new Radio();
-        radio.setCurrentStation(6);
+        radio.setCurrentStation(12);
         radio.next();
-        int expected = 7;
+        int expected = 0;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
 
+
     @Test
     public void TestPrevStation() {
         Radio radio = new Radio();
-        radio.setCurrentStation(0);
+        radio.setCurrentStation(44);
         radio.prev();
         int expected = 9;
         int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals (expected, actual);
     }
 }
