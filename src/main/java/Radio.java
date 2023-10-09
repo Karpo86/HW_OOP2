@@ -1,92 +1,82 @@
 public class Radio {
-    private int currentStation;
+    private int maxStation;
+    private int minStation = 0;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int stationsAmount = 10;
+    private int stationNum;
     private int currentVolume;
 
-    public int getCurrentStation() {
-        return currentStation;
+    public Radio(int stationsAmount) {
+        this.stationsAmount = stationsAmount;
+        maxStation = stationsAmount - 1;
+    }
+
+    public Radio() {
+        maxStation = stationsAmount - 1;
+    }
+
+    public int getStationNum() {
+        return stationNum;
     }
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
-    public int setToMaxStation() {
-        this.currentStation =9;
-        return 0;
+    public void setStationNum(int newStationNum) {
+        if (newStationNum < minStation) {
+            return;
+        }
+        if (newStationNum > maxStation) {
+            return;
+        }
+        stationNum = newStationNum;
     }
 
-    public int setToMinStation() {
-        this.currentStation = 0;
-        return 0;
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume < minVolume) {
+            return;
+        }
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
     }
 
-
-    // Работа с радиостанциями:
-
-    public void setCurrentStation(int currentStation) {
-        if (currentStation > 9) {
-            return;
+    public void nextStationNum() {
+        if (stationNum < maxStation) {
+            stationNum++;
+        } else {
+            stationNum = minStation;
         }
-        if (currentStation < 0) {
-            return;
+    }
+
+    public void prevStationNum() {
+        if (stationNum > minStation) {
+            stationNum--;
+        } else {
+            stationNum = maxStation;
         }
-        this.currentStation = currentStation;
-    } //Устанавливаем конкретную станцию
+    }
 
-    public void nextTransferStation(int currentStation) {
-        if (currentStation == 9) {
-            currentStation = setToMinStation();
-            return;
-        }
-        currentStation++;
+    public void setToMinVolume() {
+        currentVolume = minVolume;
+    }
 
-        this.currentStation = currentStation;
+    public void setToMaxVolume() {
+        currentVolume = maxVolume;
+    }
 
-    } //Переключаем на +1 станцию
-
-    public void prevCurrentStation(int currentStation) {
-        if (currentStation == 0) {
-            currentStation = setToMaxStation();
-            return;
-        }
-        currentStation--;
-
-        this.currentStation = currentStation;
-    } //Переключаем на -1 станцию
-
-
-    // Работа с уровнем громкости звука:
-
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > 100) {
-            return;
-        }
-        if (currentVolume < 0) {
-            return;
-        }
-        this.currentVolume = currentVolume;
-    } //Устанавливаем ур-нь звука
-
-    public void increaseVolume(int currentVolume) {
-        if (currentVolume < 100) {
+    public void increaseVolume() {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         }
-        if (currentVolume > 100) {
-            currentVolume = 100;
+    }
+
+    public void lowerVolume() {
+        if (currentVolume > minVolume) {
+            currentVolume--;
         }
-        this.currentVolume = currentVolume;
-    } //Прибавляем уровень звука
-
-    public void decreaseVolume(int currentVolume) {
-        if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
-        }
-        if (currentVolume > 100) {
-            return;
-        }
-        this.currentVolume = currentVolume;
-    } //Уменьшаем уровень звука
-
-
-
+    }
 }
